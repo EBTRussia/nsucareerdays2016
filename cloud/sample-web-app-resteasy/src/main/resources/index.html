@@ -1,0 +1,65 @@
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Light Test</title>
+        <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet">
+        <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+        <link href="bootstrap-toggle.css" rel="stylesheet">
+        <link href="stylesheet.css" rel="stylesheet">
+        <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+        <script src="bootstrap-toggle.js"></script>
+    </head>
+    <body>
+        <header>
+            <div class="mast-head">
+                <div class="container">
+                    <h1>Тестирование сервиса для NSU Career Days 2016</h1>
+                </div>
+            </div>
+        </header>
+        <main>
+            <div class="container">
+                <h3>Включите/выключите лампу</h3>
+                <div>
+                    <label class="checkbox-inline">
+                        <input name="light01" type="checkbox" data-toggle="toggle"> Первая
+                    </label>
+                    <label class="checkbox-inline">
+                        <input name="light02" type="checkbox" data-toggle="toggle"> Вторая
+                    </label>
+                    <label class="checkbox-inline">
+                        <input name="light03" type="checkbox" data-toggle="toggle"> Третья
+                    </label>
+                </div>
+            </div>
+        </main>
+        <script type="text/javascript">
+            var baseUrl = '/'
+            $(function () {
+                $.get(baseUrl).done(function (data) {
+                    $.each(data, function (name, value) {
+                        var checkbox = $('.checkbox-inline input[name="' + name + '"]');
+                        if (checkbox.length > 0) {
+                            checkbox.bootstrapToggle(value ? 'on' : 'off');
+                        }
+                    });
+                });
+
+                $('.checkbox-inline input[type="checkbox"]').change(function () {
+                    var $this = $(this);
+                    var checked = this.checked;
+                    var name = $this.attr('name');
+                    $.ajax({
+                        processData: false,
+                        type: "POST",
+                        contentType: "application/json",
+                        url: baseUrl + name,
+                        data: checked
+                    });
+                });
+            });
+        </script>
+    </body>
+</html>

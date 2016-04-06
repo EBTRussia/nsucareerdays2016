@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="war" name="sample-web-app-resteasy:war">
+    <output-path>$PROJECT_DIR$/sample-web-app-resteasy/target</output-path>
+    <root id="archive" name="light-1.0-SNAPSHOT.war">
+      <element id="artifact" artifact-name="sample-web-app-resteasy:war exploded" />
+    </root>
+  </artifact>
+</component>
